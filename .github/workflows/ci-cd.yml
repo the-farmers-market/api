@@ -130,7 +130,7 @@ jobs:
       - name: Health check
         run: |
           for i in 1 2 3 4 5; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "http://${{ secrets.EC2_HOST }}:8080/q/health/ready" || true)
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "http://${{ secrets.EC2_HOST }}/q/health/ready" || true)
             if [ "$STATUS" = "200" ]; then
               echo "Health check passed!"
               exit 0
