@@ -1,14 +1,9 @@
-FROM registry.access.redhat.com/ubi8/openjdk-21:1.20 AS builder
-
-WORKDIR /build
-COPY --chown=185 . .
-RUN ./gradlew build -Dquarkus.package.jar.type=uber-jar -x test
-
 FROM registry.access.redhat.com/ubi8/openjdk-21-runtime:1.20
 
 ENV LANGUAGE='en_US:en'
 
-COPY --from=builder --chown=185 /build/build/libs/*-runner.jar /deployments/quarkus-run.jar
+# Copy the pre-built uber-jar (built by CI)
+COPY --chown=185 build/libs/*-runner.jar /deployments/quarkus-run.jar
 
 EXPOSE 8080
 USER 185
