@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/openjdk-21-runtime:1.20
 ENV LANGUAGE='en_US:en'
 
 # Copy the pre-built uber-jar (built by CI)
-COPY --chown=185 build/libs/*-runner.jar /deployments/quarkus-run.jar
+COPY --chown=185 build/*-runner.jar /deployments/quarkus-run.jar
 
 EXPOSE 8080
 USER 185
